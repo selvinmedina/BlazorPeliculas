@@ -1,0 +1,64 @@
+﻿@page "/"
+@*<p>Hola, @UtilidadesString.Enmayuscular(UtilidadesString.nombre)</p>
+
+    <p>Vamos a sumar 2 + 2 = @(2+2+2)</p>
+
+    <button @onclick='ManejarClick'>Presionameee</button>*@
+
+<div>
+    <h3>Peliculas</h3>
+    <ListadoPeliculas Peliculas="ObtenerPeliculas()" />
+</div>
+
+<div>
+    <h2>Crear nueva Película</h2>
+
+    <EjemploTexto placeholder="Placeholder Index" />
+</div>
+
+@code {
+
+    public Pelicula Spiderman { get => ObtenerPelicula(); }
+
+    private Dictionary<string, object> EjemploTexboxParametros;
+
+    public Index() => EjemploTexboxParametros = new()
+        {
+            { "placeholder", "Nuevo Placeholder 2 editado" },
+            { "disabled", "true" }
+        };
+
+    private Pelicula ObtenerPelicula()
+    {
+        return new Pelicula
+            {
+                Lanzamiento = DateTime.Now,
+                Titulo = "Spiderman 2"
+            };
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+
+    }
+
+    private List<Pelicula> ObtenerPeliculas()
+    {
+        var pelicualas = new List<Pelicula>();
+
+        pelicualas.Add(new Pelicula { Lanzamiento = new DateTime(2019, 7, 2), Titulo = "<b>Spiderman 2</b>" });
+        pelicualas.Add(new Pelicula { Lanzamiento = new DateTime(2019, 7, 3), Titulo = "<i>Moana</i>" });
+        pelicualas.Add(new Pelicula { Lanzamiento = new DateTime(2019, 7, 4), Titulo = "Inception" });
+
+        return pelicualas;
+
+    }
+
+    private void ManejarClick()
+    {
+        //Console.BackgroundColor = ConsoleColor.Green;
+        //Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Me han clickeado desde metodo");
+    }
+}
